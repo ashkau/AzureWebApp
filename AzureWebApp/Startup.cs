@@ -1,3 +1,4 @@
+using AzureWebApp.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,9 @@ namespace AzureWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            //services.AddMvc();  
+            //services.AddSingleton<IConfiguration>(Configuration);
+            ProductService.Config = Configuration;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

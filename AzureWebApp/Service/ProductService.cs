@@ -1,7 +1,10 @@
 ﻿using AzureWebApp.Model;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +17,14 @@ namespace AzureWebApp.Service
         private static string db_password = "Azure@123";
         private static string db_database = "AppServiceDB";
 
+        private IConfiguration _configuration;
+        public static IConfiguration Config;
+
+        public ProductService(IConfiguration cofiguration)
+        {
+            _configuration = cofiguration;
+        }
+
         private SqlConnection GetConnection()
         {
             var _builder = new SqlConnectionStringBuilder();
@@ -22,7 +33,13 @@ namespace AzureWebApp.Service
             _builder.DataSource = db_source;
             _builder.InitialCatalog = db_database;
 
-            return new SqlConnection(_builder.ConnectionString);
+            string connStr = _configuration.GetConnectionString("ConnectionString");
+            connStr = Config.GetConnectionString("ConnectionString");
+
+
+
+            //return new SqlConnection(_builder.ConnectionString);
+            return new SqlConnection(connStr);
         }
 
         public List<Product> GetProducts()

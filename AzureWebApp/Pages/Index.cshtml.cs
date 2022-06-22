@@ -2,6 +2,7 @@
 using AzureWebApp.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,14 @@ namespace AzureWebApp.Pages
 
         public void OnGet()
         {
-            ProductService productService = new ProductService();
+            IConfiguration Configuration;
+
+            var builder = new ConfigurationBuilder()
+            .AddJsonFile("appSettings.json");
+
+            Configuration = builder.Build();
+
+            ProductService productService = new ProductService(Configuration);
             products = productService.GetProducts();
 
 
