@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AzureWebApp.Service
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private static string db_source = "azureappdbserver1.database.windows.net";
         private static string db_user = "sqladmin";
@@ -34,7 +34,7 @@ namespace AzureWebApp.Service
             _builder.InitialCatalog = db_database;
 
             string connStr = _configuration.GetConnectionString("ConnectionString");
-            connStr = Config.GetConnectionString("ConnectionString");
+            //connStr = Config.GetConnectionString("ConnectionString");
 
 
 

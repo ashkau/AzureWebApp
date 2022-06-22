@@ -16,19 +16,25 @@ namespace AzureWebApp.Pages
 
         public List<Product> products;
 
+        private IProductService _productService;
+        public IndexModel(IProductService productService)
+        {
+            _productService = productService;
+        }
+
         public void OnGet()
         {
-            IConfiguration Configuration;
+            //IConfiguration Configuration;
 
-            var builder = new ConfigurationBuilder()
-            .AddJsonFile("appSettings.json");
+            //var builder = new ConfigurationBuilder()
+            //.AddJsonFile("appSettings.json");
 
-            Configuration = builder.Build();
+            //Configuration = builder.Build();
 
-            ProductService productService = new ProductService(Configuration);
-            products = productService.GetProducts();
+            //ProductService productService = new ProductService(Configuration);
+            //products = productService.GetProducts();
 
-
+            products = _productService.GetProducts();
         }
     }
 }

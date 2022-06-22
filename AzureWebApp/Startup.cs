@@ -27,7 +27,7 @@ namespace AzureWebApp
             services.AddRazorPages();
             //services.AddMvc();  
             //services.AddSingleton<IConfiguration>(Configuration);
-            ProductService.Config = Configuration;
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +44,7 @@ namespace AzureWebApp
                 app.UseHsts();
             }
 
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
